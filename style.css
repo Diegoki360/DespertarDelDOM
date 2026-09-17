@@ -1,3 +1,49 @@
-#prueba{
+body{
+    display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
+	flex-direction: column;
+	justify-content: space-around;
+    align-items: center;
+}
+
+header{
     color: blue
+}
+
+#tablero{
+    display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
+    flex-direction: column;
+    
+    background-color: black;
+    aspect-ratio: 1 / 1;
+    height: 80vh;
+}
+
+.fila{
+    display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
+    flex: 1; /*para repartir el espacio igual entre todos los hermanos*/
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+    background-color: rgb(41, 133, 159);
+}
+
+.casilla{
+    background-color: red;
+    aspect-ratio: 1 / 1;
+    height: 70%;
+}
+
+.casilla:hover{
+    background-color: rgb(243, 142, 142);
+}
+
+.target{
+    background-color: rgb(34, 0, 255);
+    aspect-ratio: 1 / 1;
+    height: 70%;
+}
+
+.target:hover{
+    background-color: rgb(89, 91, 99);
 }
