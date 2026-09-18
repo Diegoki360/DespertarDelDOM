@@ -9,8 +9,31 @@ header{
     color: blue
 }
 
+/*=========ELEMENTOS CENTRALES=========*/
+
+#pantallaCentral{
+    display: flex;
+    flex-direction: space-around;
+}
+
+#instruciones{
+    display: flex;
+    width: 20vw;
+    margin: 3vw;
+    background-color: pink;
+}
+
+#leaderboard{
+    display: flex;
+    width: 20vw;
+    margin: 3vw;
+    background-color: turquoise;
+}
+
+/*=========TABLERO=========*/
+
 #tablero{
-    display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
+    display: flex;
     flex-direction: column;
     
     background-color: black;
@@ -19,7 +42,7 @@ header{
 }
 
 .fila{
-    display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
+    display: flex;
     flex: 1; /*para repartir el espacio igual entre todos los hermanos*/
     flex-direction: row;
     justify-content: space-around;
@@ -46,4 +69,12 @@ header{
 
 .target:hover{
     background-color: rgb(89, 91, 99);
+}
+
+/*=========TIMER=========*/
+
+.timerNum{
+    color:#78cbc1;
+	font-size:5vh;
+	display: inline;
 }

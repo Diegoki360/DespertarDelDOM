@@ -1,19 +1,68 @@
 
-// *** CONSTANTES ***
+//=========  CONSTANTES ========= 
 
 const tablero = document.getElementById("tablero");
 
 const casillasLado = 5;
 const targets = 3;
+const rondas = 5;
+const tiempoEntreRondasMIN = 1;
+const tiempoEntreRondasMAX = 3;
 
+//Para los Jugadores
+let nombreJugador = "Jugador"
+
+//para el tablero
 let targetsActivos = 0;
+let partidaActiva = false;
 
-// *** FUNCIONES ***
+//Para el cronometro
+let ms = 0;
+let s = 0;
+let intervalo;
+
+//para las puntuaciones
+let rondasJugadas = 0;
+let msPorRonda = []; 
+let tiemposRecord = [];
+let jugadoresRecord = [];
+
+//========= FUNCIONES =========
 
 function inicio() {	//Se llama al cargar la página
   generarCasillas();
-  randomizarTargets();
 }
+
+function start(){
+    iniciarPartida();
+}
+
+//========= Inicio de la partida =========
+
+function iniciarPartida(){
+    if(partidaActiva == false){
+
+        partidaActiva = true;
+
+        //Reseteo todas las variables pertinentes
+        targetsActivos = 0;
+        ms = 0;
+        s = 0;
+        rondasJugadas = 0;
+        msPorRonda = [];
+
+        //Lanzo la primera ronda en un momento aleatorio
+        let tiempoParaSiguiente = tiempoAleatorio()
+        setTimeout(lanzarPrimeraRonda, tiempoParaSiguiente);
+    } 
+}
+
+function lanzarPrimeraRonda(){
+    randomizarTargets();
+    activarCronometro();
+}
+
+//========= GENERACION DEL TABLERO =========
 
 function generarCasillas(){ //Genero las casillas del tablero
     let casillasTotal = casillasLado * casillasLado;
@@ -38,6 +87,8 @@ function generarCasillas(){ //Genero las casillas del tablero
     }
 }
 
+//========= INTERACCION CON LOS TARGETS =========
+
 function randomizarTargets(){
     let numeros = numerosSinRepeticion();
 
@@ -48,6 +99,7 @@ function randomizarTargets(){
     }
 
     targetsActivos = targets;
+    //activarCronometro(); //Reactivo el cronometro una vez definidos los targets
 }
 
 function numerosSinRepeticion() {
@@ -69,10 +121,12 @@ function pulsarCasilla(){
     if(this.className == "target"){ //Compruebo si es o no target
         this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
         targetsActivos--;
-        console.log(targetsActivos);
+        //console.log("Targets Activos: "+targetsActivos);
+        //console.log("Rondas: "+rondasJugadas);
 
-        if(targetsActivos === 0){ //Si pulsamos todos los targets los reroleamos
-            rerolearTargets();
+        if(targetsActivos === 0 && rondasJugadas < rondas){ //Si pulsamos todos los targets los reroleamos si no ha terminado la partida
+            //console.log("LLamando Siguiente Ronda");
+            finRonda();
         }
     }
     else{
@@ -80,6 +134,109 @@ function pulsarCasilla(){
     }
 }
 
-function rerolearTargets(){
-    randomizarTargets();
+function finRonda(){
+    //Detengo el contador
+    desactivarCronometro();
+
+    //Guardo el tiempo que se ha tardado
+    console.log(tiempoAMs());
+    msPorRonda.push(tiempoAMs());
+
+    //Sumo una ronda
+    rondasJugadas++;
+    console.log(rondasJugadas);
+
+    //Reinicio el contador
+    s = 0;
+    ms = 0;
+
+    prepararSiguienteRonda(); //Define si se pasa o no a la siguiente ronda
+}
+
+function prepararSiguienteRonda(){
+    if(rondasJugadas < rondas){ //Solo creo nuevos targets aun quedan rondas
+
+        let tiempoParaSiguiente = tiempoAleatorio()
+ 
+        setTimeout(randomizarTargets, tiempoParaSiguiente);
+        setTimeout(activarCronometro, tiempoParaSiguiente);
+    } 
+    else{ //Si se acabaron las rondas, gestiono el record
+        gestionarRecord();
+    }
+}
+
+function tiempoAleatorio() {
+    return ((Math.random() * (tiempoEntreRondasMAX - tiempoEntreRondasMIN)) + tiempoEntreRondasMIN)*1000;
+}
+
+////========= CRONOMETROS =========
+
+function activarCronometro(){
+	intervalo = setInterval(sumar,10);
+}
+
+function desactivarCronometro(){
+	clearInterval(intervalo);
+}
+
+function sumar(){
+	if(ms < 9){
+		ms++;
+		document.getElementById("mili").innerHTML = "0" + ms;
+	}
+	else if(ms >= 9){
+		ms++;
+		document.getElementById("mili").innerHTML = "" + ms;
+	}
+	
+	if(ms === 99){
+		s++;
+		ms = 0;
+	}
+	
+	if(s < 10){
+		document.getElementById("seg").innerHTML = "0" + s;
+	}
+	else if(s >= 10){
+		document.getElementById("seg").innerHTML = s;
+	}
+}
+
+function tiempoAMs(){ //Transforma el tiempo en ms puros
+    return ((s*1000)+(ms*10));
+}
+
+function msASegundos(ms) {
+    let segundos = Math.floor(ms / 1000);
+    let milisegundos = ms % 1000;
+
+    return segundos + ":" + milisegundos;
+}
+
+////========= PUNTACIONES =========
+
+function gestionarRecord(){
+    //TODO añadirlo al records
+
+    let record = calcularMedia();
+
+    console.log("Record: "+record+" Tambien "+msASegundos(record));
+
+    partidaActiva = false; //Se acabó la partida
+}
+
+function calcularMedia() {
+    let suma = 0;
+
+    for (let i = 0; i < msPorRonda.length; i++) {
+        suma += msPorRonda[i];
+    }
+
+    return suma / msPorRonda.length;
+}
+
+function registrarRecord(record){
+    tiemposRecord.push(record);
+    jugadoresRecord.push(nombreJugador);
 }
