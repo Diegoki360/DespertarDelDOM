@@ -35,8 +35,17 @@ function inicio() {	//Se llama al cargar la página
   generarCasillas();
 }
 
+/*========= NAV =========*/
+
 function start(){
     iniciarPartida();
+}
+
+function nombre() {//Funcion para escribir tu propio nombre
+    var nombre = prompt("Nuevo Jugador");
+    nombreJugador = nombre;
+
+	//document.getElementById("name").innerHTML = nombre;
 }
 
 //========= Inicio de la partida =========
@@ -213,7 +222,7 @@ function msASegundos(ms) {
     let segundos = Math.floor(ms / 1000);
     let milisegundos = ms % 1000;
 
-    return segundos + ":" + milisegundos;
+    return segundos + ":" + milisegundos.toString().padStart(3, "0");;
 }
 
 ////========= PUNTACIONES =========
@@ -252,6 +261,8 @@ function imprimirLeaderboard(){
     let leaderList = document.getElementById("leaderList");
     leaderList.innerHTML = "";//Borro todo
 
+    ordenarLeaderboard();//La ordeno antes
+
     for(let i = 0; i < tiemposRecord.length; i++){
         //Creo el mensaje del top 1
         let nombre = jugadoresRecord[i];
@@ -266,5 +277,28 @@ function imprimirLeaderboard(){
         
         //Lo añado
         leaderList.appendChild(leader);
+    }
+}
+
+function ordenarLeaderboard() { //Usando el algoritmo de burbuja
+
+    for (let i = 0; i < tiemposRecord.length - 1; i++) {
+
+        for (let j = 0; j < tiemposRecord.length - 1 - i; j++) {
+
+            // Si el de la izquierda es peor que el de la derecha
+            if (tiemposRecord[j] > tiemposRecord[j + 1]) {
+
+                // Intercambio los tiempos
+                let auxTiempo = tiemposRecord[j];
+                tiemposRecord[j] = tiemposRecord[j + 1];
+                tiemposRecord[j + 1] = auxTiempo;
+
+                // Intercambio también los jugadores
+                let auxJugador = jugadoresRecord[j];
+                jugadoresRecord[j] = jugadoresRecord[j + 1];
+                jugadoresRecord[j + 1] = auxJugador;
+            }
+        }
     }
 }
