@@ -7,11 +7,11 @@
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="logic.js" defer></script>
 </head>
-<body onload = "inicio()">
+<body>
     <header> HEADER </header>
     <nav>
-        <button onclick="start()">START</button>
-        <button onclick="nombre()">CAMBIAR JUGADOR</button>
+        <button id="botonStart">START</button>
+        <button id="botonNombre">CAMBIAR JUGADOR</button>
     </nav>
     <section id="timer">
         <p class="timerNum" id="seg">00</p>
@@ -22,9 +22,15 @@
         <section id="instruciones">
             <h1 id="instrucionesHeader">INSTRUCIONES</h1>
             <ul>
-                <li class="instrucion">Instruciones</li>
-                <li class="instrucion">mas Instruciones</li>
-                <li class="instrucion">bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</li>
+                <li class="instrucion">¿Podrás convertirte en el pistolero más rápido de la galaxia?</li>
+                <li class="instrucion">Pulsa START y prepárate para el duelo.</li>
+                <li class="instrucion">Cuando aparezcan los objetivos, ¡dispara a todos los targets azules!</li>
+                <li class="instrucion">No te despistes: cada milisegundo cuenta.</li>
+                <li class="instrucion">Supera las 5 rondas para registrar tu tiempo.</li>
+                <li class="instrucion">Tu puntuación será la media de tus tiempos de reacción.</li>
+                <li class="instrucion">Cuanto menor sea tu tiempo, más alto estarás en el leaderboard.</li>
+                <li class="instrucion">Cambia de pistolero con CAMBIAR JUGADOR y reta a tus amigos.</li>
+                <li class="instrucion">¡Desenfunda tu bláster y demuestra quién manda en la galaxia!</li>
             </ul>
         </section>
 
@@ -35,9 +41,7 @@
         <section id="leaderboard">
             <h1 id="leaderboardHeader">LEADERBOARD</h1>
             <ol id="leaderList">
-                <li class="leader">Instruciones</li>
-                <li class="leader">mas Instruciones</li>
-                <li class="leader">bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</li>
+                
             </ol>
         </section>
     </section>

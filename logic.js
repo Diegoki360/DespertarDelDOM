@@ -29,6 +29,13 @@ let msPorRonda = [];
 let tiemposRecord = [];
 let jugadoresRecord = [];
 
+//========= EVENTOS =========
+
+document.addEventListener("DOMContentLoaded", inicio);//Al cargar
+
+document.getElementById("botonStart").addEventListener("click", start);//Al pulsar start
+document.getElementById("botonNombre").addEventListener("click", nombre);//Al pulsar sobre nombre
+
 //========= FUNCIONES =========
 
 function inicio() {	//Se llama al cargar la página
@@ -104,7 +111,7 @@ function randomizarTargets(){
     let numeros = numerosSinRepeticion();
 
     for(let i = 0; i < targets; i++){
-        casillaElegida = document.getElementById("casilla"+numeros[i]);
+        let casillaElegida = document.getElementById("casilla"+numeros[i]);
 
         casillaElegida.classList.replace("casilla", "target"); //Cambio su clase de casilla a target
     }
