@@ -1,5 +1,5 @@
 
-//=========  CONSTANTES ========= 
+//========= CONSTANTES ========= 
 
 const tablero = document.getElementById("tablero");
 
@@ -8,6 +8,8 @@ const targets = 3;
 const rondas = 5;
 const tiempoEntreRondasMIN = 1;
 const tiempoEntreRondasMAX = 3;
+
+//========= GLOBALES ========= 
 
 //Para los Jugadores
 let nombreJugador = "Jugador"
@@ -223,6 +225,8 @@ function gestionarRecord(){
 
     console.log("Record: "+record+" Tambien "+msASegundos(record));
 
+    registrarRecord(record);
+
     partidaActiva = false; //Se acabó la partida
 }
 
@@ -239,4 +243,28 @@ function calcularMedia() {
 function registrarRecord(record){
     tiemposRecord.push(record);
     jugadoresRecord.push(nombreJugador);
+
+    imprimirLeaderboard();
+}
+
+function imprimirLeaderboard(){
+    //lo añado
+    let leaderList = document.getElementById("leaderList");
+    leaderList.innerHTML = "";//Borro todo
+
+    for(let i = 0; i < tiemposRecord.length; i++){
+        //Creo el mensaje del top 1
+        let nombre = jugadoresRecord[i];
+        let tiempo = msASegundos(tiemposRecord[i]);
+
+        let mensaje = ""+nombre+" "+tiempo;
+    
+        //Creo el elemento
+        let leader = document.createElement("li");
+        leader.classList.add("leader");
+        leader.textContent = mensaje;
+        
+        //Lo añado
+        leaderList.appendChild(leader);
+    }
 }

@@ -16,18 +16,34 @@ header{
     flex-direction: space-around;
 }
 
+/*INSTRUCIONES*/
+
 #instruciones{
     display: flex;
+    flex-direction: column;
+
     width: 20vw;
     margin: 3vw;
     background-color: pink;
 }
 
+#instrucionesHeader{
+    text-align: center;
+}
+
+/*LEADERBOARD*/
+
 #leaderboard{
     display: flex;
+    flex-direction: column;
+
     width: 20vw;
     margin: 3vw;
     background-color: turquoise;
+}
+
+#leaderboardHeader{
+    text-align: center;
 }
 
 /*=========TABLERO=========*/
