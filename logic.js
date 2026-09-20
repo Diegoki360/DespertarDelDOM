@@ -49,7 +49,7 @@ function start(){
 }
 
 function nombre() {//Funcion para escribir tu propio nombre
-    var nombre = prompt("Nuevo Jugador");
+    let nombre = prompt("Nuevo Jugador");
     nombreJugador = nombre;
 
 	//document.getElementById("name").innerHTML = nombre;
@@ -89,14 +89,14 @@ function generarCasillas(){ //Genero las casillas del tablero
         let filaCasillas = document.createElement("div");
        
         filaCasillas.classList.add("fila"); //Argumento Clase
-        filaCasillas.id = "fila" + i; //Argumento id 
+        filaCasillas.id = `fila${i}`; //Argumento id 
 
         for(let j = 0; j < casillasLado; j++){
             let casilla = document.createElement("div");
 
             casilla.classList.add("casilla"); //Argumento Clase
-            casilla.id = "casilla" + ((i*casillasLado)+j); //Argumento id
-            casilla.onclick = pulsarCasilla;
+            casilla.id = `casilla${(i * casillasLado) + j}`; //Argumento id
+            casilla.addEventListener("click", pulsarCasilla) //Le añado a la casilla generada el evento
 
             filaCasillas.appendChild(casilla); //meto la casilla en la fila
         } 
@@ -111,7 +111,7 @@ function randomizarTargets(){
     let numeros = numerosSinRepeticion();
 
     for(let i = 0; i < targets; i++){
-        let casillaElegida = document.getElementById("casilla"+numeros[i]);
+        let casillaElegida = document.getElementById(`casilla${numeros[i]}`);
 
         casillaElegida.classList.replace("casilla", "target"); //Cambio su clase de casilla a target
     }
@@ -136,7 +136,7 @@ function numerosSinRepeticion() {
 }
 
 function pulsarCasilla(){
-    if(this.className == "target"){ //Compruebo si es o no target
+    if(this.classList.contains("target")){ //Compruebo si es o no target
         this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
         targetsActivos--;
         //console.log("Targets Activos: "+targetsActivos);
@@ -201,11 +201,11 @@ function desactivarCronometro(){
 function sumar(){
 	if(ms < 9){
 		ms++;
-		document.getElementById("mili").innerHTML = "0" + ms;
+		document.getElementById("mili").textContent = "0" + ms;
 	}
 	else if(ms >= 9){
 		ms++;
-		document.getElementById("mili").innerHTML = "" + ms;
+		document.getElementById("mili").textContent = "" + ms;
 	}
 	
 	if(ms === 99){
@@ -214,10 +214,10 @@ function sumar(){
 	}
 	
 	if(s < 10){
-		document.getElementById("seg").innerHTML = "0" + s;
+		document.getElementById("seg").textContent = "0" + s;
 	}
 	else if(s >= 10){
-		document.getElementById("seg").innerHTML = s;
+		document.getElementById("seg").textContent = s;
 	}
 }
 
@@ -266,7 +266,7 @@ function registrarRecord(record){
 function imprimirLeaderboard(){
     //lo añado
     let leaderList = document.getElementById("leaderList");
-    leaderList.innerHTML = "";//Borro todo
+    leaderList.textContent = "";//Borro todo
 
     ordenarLeaderboard();//La ordeno antes
 
@@ -275,7 +275,7 @@ function imprimirLeaderboard(){
         let nombre = jugadoresRecord[i];
         let tiempo = msASegundos(tiemposRecord[i]);
 
-        let mensaje = ""+nombre+" "+tiempo;
+        let mensaje = `${nombre} ${tiempo}`;
     
         //Creo el elemento
         let leader = document.createElement("li");
