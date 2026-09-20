@@ -200,10 +200,23 @@ body.dark .casilla{
 }
 
 .casilla:hover{
+    background-color: rgb(202, 99, 99);
+}
+
+body.dark .casilla:hover{
     background-color: rgb(108, 99, 202);
 }
 
 .target{
+    background-color: rgb(255, 20, 20);
+    aspect-ratio: 1 / 1;
+    height: 65%;
+    border-radius:2vh;
+
+    box-shadow: 0.5vh 0.5vh 0px #020021;
+}
+
+body.dark .target{
     background-color: rgb(79, 20, 255);
     aspect-ratio: 1 / 1;
     height: 65%;
@@ -213,6 +226,10 @@ body.dark .casilla{
 }
 
 .target:hover{
+    background-color: rgb(128, 131, 145);
+}
+
+body.dark .target:hover{
     background-color: rgb(128, 131, 145);
 }
 
