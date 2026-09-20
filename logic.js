@@ -117,7 +117,6 @@ function randomizarTargets(){
     }
 
     targetsActivos = targets;
-    //activarCronometro(); //Reactivo el cronometro una vez definidos los targets
 }
 
 function numerosSinRepeticion() {
@@ -139,11 +138,8 @@ function pulsarCasilla(){
     if(this.classList.contains("target")){ //Compruebo si es o no target
         this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
         targetsActivos--;
-        //console.log("Targets Activos: "+targetsActivos);
-        //console.log("Rondas: "+rondasJugadas);
 
         if(targetsActivos === 0 && rondasJugadas < rondas){ //Si pulsamos todos los targets los reroleamos si no ha terminado la partida
-            //console.log("LLamando Siguiente Ronda");
             finRonda();
         }
     }
@@ -235,13 +231,12 @@ function msASegundos(ms) {
 ////========= PUNTACIONES =========
 
 function gestionarRecord(){
-    //TODO añadirlo al records
 
     let record = calcularMedia();
 
     console.log("Record: "+record+" Tambien "+msASegundos(record));
 
-    registrarRecord(record);
+    registrarRecord(record); //Registro el Record
 
     partidaActiva = false; //Se acabó la partida
 }
