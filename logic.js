@@ -8,6 +8,8 @@ const targets = 3;
 const rondas = 5;
 const tiempoEntreRondasMIN = 1;
 const tiempoEntreRondasMAX = 3;
+const mili = document.getElementById("mili");
+const seg = document.getElementById("seg");
 
 //========= GLOBALES ========= 
 
@@ -143,9 +145,6 @@ function pulsarCasilla(){
             finRonda();
         }
     }
-    else{
-        console.log("no target");
-    }
 }
 
 function finRonda(){
@@ -153,12 +152,10 @@ function finRonda(){
     desactivarCronometro();
 
     //Guardo el tiempo que se ha tardado
-    console.log(tiempoAMs());
     msPorRonda.push(tiempoAMs());
 
     //Sumo una ronda
     rondasJugadas++;
-    console.log(rondasJugadas);
 
     //Reinicio el contador
     s = 0;
@@ -195,26 +192,15 @@ function desactivarCronometro(){
 }
 
 function sumar(){
-	if(ms < 9){
-		ms++;
-		document.getElementById("mili").textContent = "0" + ms;
-	}
-	else if(ms >= 9){
-		ms++;
-		document.getElementById("mili").textContent = "" + ms;
-	}
-	
-	if(ms === 99){
-		s++;
-		ms = 0;
-	}
-	
-	if(s < 10){
-		document.getElementById("seg").textContent = "0" + s;
-	}
-	else if(s >= 10){
-		document.getElementById("seg").textContent = s;
-	}
+	ms++;
+
+    if(ms === 100){
+        s++;
+        ms = 0;
+    }
+
+    mili.textContent = ms.toString().padStart(2, "0");
+    seg.textContent = s.toString().padStart(2, "0");
 }
 
 function tiempoAMs(){ //Transforma el tiempo en ms puros
@@ -233,8 +219,6 @@ function msASegundos(ms) {
 function gestionarRecord(){
 
     let record = calcularMedia();
-
-    console.log("Record: "+record+" Tambien "+msASegundos(record));
 
     registrarRecord(record); //Registro el Record
 
