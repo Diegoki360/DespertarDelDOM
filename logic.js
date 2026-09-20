@@ -38,10 +38,18 @@ document.addEventListener("DOMContentLoaded", inicio);//Al cargar
 document.getElementById("botonStart").addEventListener("click", start);//Al pulsar start
 document.getElementById("botonNombre").addEventListener("click", nombre);//Al pulsar sobre nombre
 
+document.addEventListener("keydown", modoOscuro); //Evento de teclado
+
 //========= FUNCIONES =========
 
 function inicio() {	//Se llama al cargar la página
   generarCasillas();
+}
+
+function modoOscuro(evento){
+    if(evento.key === "n"){
+        document.body.classList.toggle("dark");
+    }
 }
 
 /*========= NAV =========*/
