@@ -1,14 +1,40 @@
+@font-face{
+	font-family: "SPACE";/*Añado mi propia fuente de texto estilo Espacial*/
+    src: url("./Fonts/nasalization/Nasalization.otf");
+} 
+
 body{
     display: flex;/*Creo el estilo del flexbox de la ds para que mantenga una relacion de aspecto cosntante*/
 	flex-direction: column;
 	justify-content: space-around;
     align-items: center;
+    background-color: rgb(123, 123, 123);
 }
 
 header{
-    color: blue
+    font-family: SPACE;
+    font-size: 5vh;
+    color: rgb(255, 213, 0);
+
+    text-shadow:
+        4px 4px 0px #222;
 }
 
+/*=========BOTONES=========*/
+
+.navButton{
+    font-family: SPACE;
+    font-size: 3vh;
+    color: rgb(255, 213, 0);
+    background-color: grey;
+
+    text-shadow:
+        2px 2px 0px #222;
+}
+
+.navButton:hover{
+    background-color: rgb(173, 173, 173);
+}
 
 /*=========ELEMENTOS CENTRALES=========*/
 
@@ -24,12 +50,25 @@ header{
     flex-direction: column;
 
     width: 20vw;
-    margin: 3vw;
-    background-color: pink;
+    margin: 1vw;
+    border-radius: 3vh;
+    background-color: rgb(198, 198, 198);
+}
+
+.instruccion{
+    font-family: SPACE;
+    margin: 1vh
 }
 
 #instrucionesHeader{
     text-align: center;
+    font-family: SPACE;
+    font-size: 4vh;
+    color: rgb(255, 213, 0);
+	display: inline;
+
+    text-shadow:
+        4px 4px 0px #222;
 }
 
 /*LEADERBOARD*/
@@ -39,12 +78,25 @@ header{
     flex-direction: column;
 
     width: 20vw;
-    margin: 3vw;
-    background-color: turquoise;
+    margin: 1vw;
+    border-radius: 3vh;
+    background-color: rgb(198, 198, 198);
+}
+
+.leader{
+    font-family: SPACE;
+    margin: 1vh
 }
 
 #leaderboardHeader{
     text-align: center;
+    font-family: SPACE;
+    font-size: 4vh;
+    color: rgb(255, 213, 0);
+	display: inline;
+
+    text-shadow:
+        4px 4px 0px #222;
 }
 
 /*=========TABLERO=========*/
@@ -53,9 +105,11 @@ header{
     display: flex;
     flex-direction: column;
     
-    background-color: black;
+    background-color: rgb(158, 158, 158);
     aspect-ratio: 1 / 1;
     height: 80vh;
+    border-radius:5vh;
+    box-shadow: 1vh 1vh 0px #222;
 }
 
 .fila{
@@ -64,34 +118,42 @@ header{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    
-    background-color: rgb(41, 133, 159);
 }
 
 .casilla{
-    background-color: red;
+    background-color: rgb(95, 0, 0);
     aspect-ratio: 1 / 1;
-    height: 70%;
+    height: 65%;
+    border-radius:2vh;
+
+    box-shadow: 0.5vh 0.5vh 0px #210000;
 }
 
 .casilla:hover{
-    background-color: rgb(243, 142, 142);
+    background-color: rgb(202, 99, 99);
 }
 
 .target{
-    background-color: rgb(34, 0, 255);
+    background-color: rgb(255, 20, 20);
     aspect-ratio: 1 / 1;
-    height: 70%;
+    height: 65%;
+    border-radius:2vh;
+
+    box-shadow: 0.5vh 0.5vh 0px #210000;
 }
 
 .target:hover{
-    background-color: rgb(89, 91, 99);
+    background-color: rgb(128, 131, 145);
 }
 
 /*=========TIMER=========*/
 
 .timerNum{
-    color:#78cbc1;
-	font-size:5vh;
+    font-family: SPACE;
+    font-size: 5vh;
+    color: rgb(255, 213, 0);
 	display: inline;
+
+    text-shadow:
+        4px 4px 0px #222;
 }
