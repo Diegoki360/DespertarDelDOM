@@ -11,6 +11,10 @@ const tiempoEntreRondasMAX = 3;
 const mili = document.getElementById("mili");
 const seg = document.getElementById("seg");
 
+const startRound = new Audio("./Sound/coin.mp3");
+const victory = new Audio("./Sound/victory.mp3");
+const pew = new Audio("./Sound/blaster.mp3");
+
 //========= GLOBALES ========= 
 
 //Para los Jugadores
@@ -69,7 +73,8 @@ function nombre() {//Funcion para escribir tu propio nombre
 
 function iniciarPartida(){
     if(partidaActiva == false){
-
+        victory.pause();
+        victory.currentTime = 0;
         partidaActiva = true;
 
         //Reseteo todas las variables pertinentes
@@ -126,6 +131,7 @@ function randomizarTargets(){
         casillaElegida.classList.replace("casilla", "target"); //Cambio su clase de casilla a target
     }
 
+    startRound.play();
     targetsActivos = targets;
 }
 
@@ -145,6 +151,9 @@ function numerosSinRepeticion() {
 }
 
 function pulsarCasilla(){
+    pew.currentTime = 0;
+    pew.play();
+
     if(this.classList.contains("target")){ //Compruebo si es o no target
         this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
         targetsActivos--;
@@ -156,6 +165,7 @@ function pulsarCasilla(){
 }
 
 function finRonda(){
+
     //Detengo el contador
     desactivarCronometro();
 
@@ -225,6 +235,8 @@ function msASegundos(ms) {
 ////========= PUNTACIONES =========
 
 function gestionarRecord(){
+
+    victory.play();
 
     let record = calcularMedia();
 
