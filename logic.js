@@ -47,7 +47,13 @@ document.addEventListener("keydown", modoOscuro); //Evento de teclado
 //========= FUNCIONES =========
 
 function inicio() {	//Se llama al cargar la página
-  generarCasillas();
+    generarCasillas();
+
+    //Recuperamos los datos del JSON y usamos los falsy por si tadavía no hay nada
+    tiemposRecord = JSON.parse(localStorage.getItem("tiemposRecord")) || [];
+    jugadoresRecord = JSON.parse(localStorage.getItem("jugadoresRecord")) || [];
+
+    imprimirLeaderboard();
 }
 
 function modoOscuro(evento){
@@ -258,6 +264,11 @@ function calcularMedia() {
 function registrarRecord(record){
     tiemposRecord.push(record);
     jugadoresRecord.push(nombreJugador);
+
+    //Guardamos los Records en el local storage como un item con ese nombre
+    //Utilizamos JSON para guardarlo conmo un item JSON puesto que no se pueden guardar arrays
+    localStorage.setItem("tiemposRecord", JSON.stringify(tiemposRecord));
+    localStorage.setItem("jugadoresRecord", JSON.stringify(jugadoresRecord));
 
     imprimirLeaderboard();
 }
