@@ -78,7 +78,7 @@ function nombre() {//Funcion para escribir tu propio nombre
 //========= Inicio de la partida =========
 
 function iniciarPartida(){
-    if(partidaActiva == false){
+    if(partidaActiva === false){
         victory.pause();
         victory.currentTime = 0;
         partidaActiva = true;
@@ -158,7 +158,10 @@ function numerosSinRepeticion() {
 
 function pulsarCasilla(){
     pew.currentTime = 0;
-    pew.play();
+
+    if(partidaActiva === true){
+        pew.play();
+    }
 
     if(this.classList.contains("target")){ //Compruebo si es o no target
         this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
