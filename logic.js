@@ -1,15 +1,15 @@
 
 //========= CONSTANTES ========= 
 
-const tablero = document.getElementById("tablero");
+const tablero = document.querySelector("#tablero");
 
 const casillasLado = 5;
 const targets = 3;
 const rondas = 5;
 const tiempoEntreRondasMIN = 1;
 const tiempoEntreRondasMAX = 3;
-const mili = document.getElementById("mili");
-const seg = document.getElementById("seg");
+const mili = document.querySelector("#mili");
+const seg = document.querySelector("#seg");
 
 const startRound = new Audio("./Sound/coin.mp3");
 const victory = new Audio("./Sound/victory.mp3");
@@ -39,8 +39,8 @@ let jugadoresRecord = [];
 
 document.addEventListener("DOMContentLoaded", inicio);//Al cargar
 
-document.getElementById("botonStart").addEventListener("click", start);//Al pulsar start
-document.getElementById("botonNombre").addEventListener("click", nombre);//Al pulsar sobre nombre
+document.querySelector("#botonStart").addEventListener("click", start);//Al pulsar start
+document.querySelector("#botonNombre").addEventListener("click", nombre);//Al pulsar sobre nombre
 
 document.addEventListener("keydown", modoOscuro); //Evento de teclado
 
@@ -70,9 +70,10 @@ function start(){
 
 function nombre() {//Funcion para escribir tu propio nombre
     let nombre = prompt("Nuevo Jugador");
-    nombreJugador = nombre;
-
-	//document.getElementById("name").innerHTML = nombre;
+    
+    if(nombre !== null && nombre !== ""){
+        nombreJugador = nombre;
+    }
 }
 
 //========= Inicio de la partida =========
@@ -104,7 +105,7 @@ function lanzarPrimeraRonda(){
 //========= GENERACION DEL TABLERO =========
 
 function generarCasillas(){ //Genero las casillas del tablero
-    let casillasTotal = casillasLado * casillasLado;
+    tablero.addEventListener("click", pulsarCasilla);
 
     for(let i = 0; i < casillasLado; i++){
         let filaCasillas = document.createElement("div");
@@ -115,9 +116,9 @@ function generarCasillas(){ //Genero las casillas del tablero
         for(let j = 0; j < casillasLado; j++){
             let casilla = document.createElement("div");
 
+             casilla.classList.add("gridSpace"); 
             casilla.classList.add("casilla"); //Argumento Clase
             casilla.id = `casilla${(i * casillasLado) + j}`; //Argumento id
-            casilla.addEventListener("click", pulsarCasilla) //Le añado a la casilla generada el evento
 
             filaCasillas.appendChild(casilla); //meto la casilla en la fila
         } 
@@ -132,7 +133,7 @@ function randomizarTargets(){
     let numeros = numerosSinRepeticion();
 
     for(let i = 0; i < targets; i++){
-        let casillaElegida = document.getElementById(`casilla${numeros[i]}`);
+        let casillaElegida = document.querySelector(`#casilla${numeros[i]}`);
 
         casillaElegida.classList.replace("casilla", "target"); //Cambio su clase de casilla a target
     }
@@ -156,18 +157,18 @@ function numerosSinRepeticion() {
     return numeros;
 }
 
-function pulsarCasilla(){
+function pulsarCasilla(evento){
     pew.currentTime = 0;
 
     if(partidaActiva === true){
         pew.play();
     }
 
-    if(this.classList.contains("target")){ //Compruebo si es o no target
-        this.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
+    if(evento.target.classList.contains("target")){ //Compruebo si es o no target
+        evento.target.classList.replace("target", "casilla"); //Cambio su clase de target a casilla
         targetsActivos--;
 
-        if(targetsActivos === 0 && rondasJugadas < rondas){ //Si pulsamos todos los targets los reroleamos si no ha terminado la partida
+        if(targetsActivos === 0){ //Si pulsamos todos los targets los reroleamos si no ha terminado la partida
             finRonda();
         }
     }
@@ -196,8 +197,10 @@ function prepararSiguienteRonda(){
 
         let tiempoParaSiguiente = tiempoAleatorio()
  
-        setTimeout(randomizarTargets, tiempoParaSiguiente);
-        setTimeout(activarCronometro, tiempoParaSiguiente);
+        setTimeout(function(){
+            randomizarTargets();
+            activarCronometro();
+        }, tiempoParaSiguiente);
     } 
     else{ //Si se acabaron las rondas, gestiono el record
         gestionarRecord();
@@ -278,7 +281,7 @@ function registrarRecord(record){
 
 function imprimirLeaderboard(){
     //lo añado
-    let leaderList = document.getElementById("leaderList");
+    let leaderList = document.querySelector("#leaderList")
     leaderList.textContent = "";//Borro todo
 
     ordenarLeaderboard();//La ordeno antes
