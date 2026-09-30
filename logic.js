@@ -57,7 +57,7 @@ function inicio() {	//Se llama al cargar la página
 }
 
 function modoOscuro(evento){
-    if(evento.key === "n"){
+    if(evento.key.toLowerCase() === "n"){
         document.body.classList.toggle("dark");
     }
 }
@@ -93,11 +93,11 @@ function iniciarPartida(){
 
         //Lanzo la primera ronda en un momento aleatorio
         let tiempoParaSiguiente = tiempoAleatorio()
-        setTimeout(lanzarPrimeraRonda, tiempoParaSiguiente);
+        setTimeout(lanzarRonda, tiempoParaSiguiente);
     } 
 }
 
-function lanzarPrimeraRonda(){
+function lanzarRonda(){
     randomizarTargets();
     activarCronometro();
 }
@@ -197,10 +197,7 @@ function prepararSiguienteRonda(){
 
         let tiempoParaSiguiente = tiempoAleatorio()
  
-        setTimeout(function(){
-            randomizarTargets();
-            activarCronometro();
-        }, tiempoParaSiguiente);
+        setTimeout(lanzarRonda, tiempoParaSiguiente);
     } 
     else{ //Si se acabaron las rondas, gestiono el record
         gestionarRecord();
@@ -237,7 +234,7 @@ function tiempoAMs(){ //Transforma el tiempo en ms puros
     return ((s*1000)+(ms*10));
 }
 
-function msASegundos(ms) {
+function formatearTiempo(ms) {
     let segundos = Math.floor(ms / 1000);
     let milisegundos = ms % 1000;
 
@@ -289,7 +286,7 @@ function imprimirLeaderboard(){
     for(let i = 0; i < tiemposRecord.length; i++){
         //Creo el mensaje del top 1
         let nombre = jugadoresRecord[i];
-        let tiempo = msASegundos(tiemposRecord[i]);
+        let tiempo = formatearTiempo(tiemposRecord[i]);
 
         let mensaje = `${nombre} ${tiempo}`;
     
