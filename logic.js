@@ -23,6 +23,7 @@ let nombreJugador = "Jugador"
 //para el tablero
 let targetsActivos = 0;
 let partidaActiva = false;
+let casillas = [];
 
 //Para el cronometro
 let ms = 0;
@@ -120,6 +121,8 @@ function generarCasillas(){ //Genero las casillas del tablero
             casilla.classList.add("casilla"); //Argumento Clase
             casilla.id = `casilla${(i * casillasLado) + j}`; //Argumento id
 
+            casillas.push(casilla);
+
             filaCasillas.appendChild(casilla); //meto la casilla en la fila
         } 
 
@@ -133,7 +136,7 @@ function randomizarTargets(){
     let numeros = numerosSinRepeticion();
 
     for(let i = 0; i < targets; i++){
-        let casillaElegida = document.querySelector(`#casilla${numeros[i]}`);
+        let casillaElegida = casillas[numeros[i]];
 
         casillaElegida.classList.replace("casilla", "target"); //Cambio su clase de casilla a target
     }
@@ -144,10 +147,10 @@ function randomizarTargets(){
 
 function numerosSinRepeticion() {
     let numeros = [];
-    let casillas = casillasLado*casillasLado
+    let casillasTotal = casillasLado * casillasLado
 
     while (numeros.length < targets) {
-        let numero = Math.floor(Math.random() * casillas);
+        let numero = Math.floor(Math.random() * casillasTotal);
 
         if (!numeros.includes(numero)) {
             numeros.push(numero);
@@ -211,11 +214,11 @@ function tiempoAleatorio() {
 ////========= CRONOMETROS =========
 
 function activarCronometro(){
-	intervalo = setInterval(sumar,10);
+    intervalo = setInterval(sumar, 10);
 }
 
 function desactivarCronometro(){
-	clearInterval(intervalo);
+    clearInterval(intervalo);
 }
 
 function sumar(){
@@ -238,7 +241,7 @@ function formatearTiempo(ms) {
     let segundos = Math.floor(ms / 1000);
     let milisegundos = ms % 1000;
 
-    return segundos + ":" + milisegundos.toString().padStart(3, "0");;
+    return segundos + ":" + milisegundos.toString().padStart(3, "0");
 }
 
 ////========= PUNTACIONES =========

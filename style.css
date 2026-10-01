@@ -77,20 +77,30 @@ body.dark .navButton:hover{
     width: 20vw;
     margin: 1vw;
     border-radius: 3vh;
+
     background-color: rgb(198, 198, 198);
+    background-image: url(./img/lightWall.jpg);
+    background-position: center;
+    background-repeat: repeat;
 }
 
 body.dark #instruciones{
     background-color: rgb(75, 75, 75);
+    background-image: url(./img/darkWall.jpg);
 }
 
 .instruccion{
     font-family: SPACE;
     margin: 1vh;
+
+    background-color: white;
+    padding: 2px;
+    border-radius: 10px;
 }
 
 body.dark .instruccion{
     color: rgb(244, 244, 244);
+    background-color: black;
 }
 
 #instrucionesHeader{
@@ -120,20 +130,30 @@ body.dark #instrucionesHeader{
     width: 20vw;
     margin: 1vw;
     border-radius: 3vh;
+
     background-color: rgb(198, 198, 198);
+    background-image: url(./img/lightWall.jpg);
+    background-position: center;
+    background-repeat: repeat;
 }
 
 body.dark #leaderboard{
     background-color: rgb(75, 75, 75);
+    background-image: url(./img/darkWall.jpg);
 }
 
 .leader{
     font-family: SPACE;
-    margin: 1vh
+    margin: 1vh;
+
+    background-color: white;
+    padding: 2px;
+    border-radius: 10px;
 }
 
 body.dark .leader{
     color: rgb(244, 244, 244);
+    background-color: black;
 }
 
 #leaderboardHeader{
